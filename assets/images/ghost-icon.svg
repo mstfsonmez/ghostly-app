@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#000000"/>
+  
+  <!-- Ghost body -->
+  <path d="M256 80 C 180 80, 120 140, 120 220 L 120 280 C 120 320, 140 360, 180 380 L 200 400 C 210 410, 220 420, 230 430 C 240 440, 250 450, 256 460 C 262 450, 272 440, 282 430 C 292 420, 302 410, 312 400 L 332 380 C 372 360, 392 320, 392 280 L 392 220 C 392 140, 332 80, 256 80 Z" fill="#00FF41"/>
+  
+  <!-- Eyes -->
+  <circle cx="200" cy="200" r="25" fill="#000000"/>
+  <circle cx="312" cy="200" r="25" fill="#000000"/>
+  
+  <!-- Mouth (optional) -->
+  <path d="M 220 280 Q 256 300, 292 280" stroke="#000000" stroke-width="8" fill="none" stroke-linecap="round"/>
+</svg>
