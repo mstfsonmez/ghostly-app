@@ -62,24 +62,31 @@ export default function RootLayout() {
     console.log('🔵 Attempting Socket.IO connection...');
     
     // Use setTimeout to prevent blocking the main thread
-    const connectSocket = () => {
+    const connectSocket = async () => {
       try {
-        socketService.connect();
+        await socketService.connect();
         console.log('✅ Socket.IO connection initiated');
       } catch (error) {
-        console.warn('⚠️ Socket.IO connection failed, app continues:', error);
+        // Silently ignore socket errors - app works without real-time
+        console.warn('⚠️ Socket.IO connection failed, app continues without real-time:', error);
       }
     };
     
     // Delay connection to let app initialize first
-    const timeoutId = setTimeout(connectSocket, 1000);
+    const timeoutId = setTimeout(() => {
+      connectSocket().catch((err) => {
+        // Double safety - catch any promise rejection
+        console.warn('⚠️ Socket connection promise rejected, app continues:', err);
+      });
+    }, 1000);
     
     return () => {
       clearTimeout(timeoutId);
       try {
         socketService.disconnect();
       } catch (error) {
-        console.warn('⚠️ Socket.IO disconnect failed:', error);
+        // Ignore disconnect errors
+        console.warn('⚠️ Socket.IO disconnect failed (ignored):', error);
       }
     };
   }, []);
