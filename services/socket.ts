@@ -20,11 +20,14 @@ class SocketService {
       this.socket = io(API_URL, {
         path: '/socket.io',
         transports: ['polling'], // Only use polling, not websocket
-        reconnection: true,
-        reconnectionDelay: 1000,
-        reconnectionAttempts: 5,
-        timeout: 10000,
+        reconnection: false, // Disable reconnection to prevent crashes
+        timeout: 5000, // Shorter timeout
+        forceNew: true, // Force new connection
+        autoConnect: false, // Manual connect
       });
+      
+      // Manual connect with error handling
+      this.socket.connect();
       
       this.socket.on('connect', () => {
         console.log('✅ Socket connected:', this.socket?.id);

@@ -12,8 +12,9 @@ export default function RootLayout() {
     const originalWarn = console.warn;
     const originalError = console.error;
     const originalLog = console.log;
-    
-    const shouldFilter = (message) => {
+
+    // Explicitly type message as unknown, and narrow it to string
+    const shouldFilter = (message: unknown): boolean => {
       if (typeof message === 'string') {
         return (
           message.includes('React DevTools global hook') ||
@@ -57,12 +58,29 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    // Initialize Socket.IO connection
-    console.log('🔵 Initializing Socket.IO connection...');
-    socketService.connect();
+    // Initialize Socket.IO with robust error handling
+    console.log('🔵 Attempting Socket.IO connection...');
+    
+    // Use setTimeout to prevent blocking the main thread
+    const connectSocket = () => {
+      try {
+        socketService.connect();
+        console.log('✅ Socket.IO connection initiated');
+      } catch (error) {
+        console.warn('⚠️ Socket.IO connection failed, app continues:', error);
+      }
+    };
+    
+    // Delay connection to let app initialize first
+    const timeoutId = setTimeout(connectSocket, 1000);
     
     return () => {
-      socketService.disconnect();
+      clearTimeout(timeoutId);
+      try {
+        socketService.disconnect();
+      } catch (error) {
+        console.warn('⚠️ Socket.IO disconnect failed:', error);
+      }
     };
   }, []);
 
