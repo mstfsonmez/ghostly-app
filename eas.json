@@ -32,6 +32,11 @@
         "gradleCommand": ":app:bundleRelease"
       },
       "node": "20.19.4",
+      "cache": {
+        "disabled": false,
+        "clear": true,
+        "paths": []
+      },
       "env": {
         "EXPO_USE_FAST_RESOLVER": "1"
       }
