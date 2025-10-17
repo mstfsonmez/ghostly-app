@@ -104,6 +104,11 @@ android {
         
         missingDimensionStrategy 'react-native-camera', 'general'
         missingDimensionStrategy 'react-native-webrtc', 'default'
+        
+        // Fix for native .so libraries not being packaged
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+        }
     }
     signingConfigs {
         debug {
@@ -131,7 +136,8 @@ android {
     }
     packagingOptions {
         jniLibs {
-            def enableLegacyPackaging = findProperty('expo.useLegacyPackaging') ?: 'false'
+            // Force legacy packaging to include native .so libraries
+            def enableLegacyPackaging = findProperty('expo.useLegacyPackaging') ?: 'true'
             useLegacyPackaging enableLegacyPackaging.toBoolean()
         }
     }
