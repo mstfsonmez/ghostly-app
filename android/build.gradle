@@ -18,6 +18,10 @@ allprojects {
     mavenCentral()
     maven { url 'https://www.jitpack.io' }
   }
+  
+  tasks.withType(JavaCompile).configureEach {
+    options.release = 11
+  }
 }
 
 apply plugin: "expo-root-project"
