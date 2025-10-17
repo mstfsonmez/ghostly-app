@@ -28,15 +28,10 @@
     },
     "production": {
       "android": {
-        "buildType": "app-bundle",
-        "gradleCommand": ":app:bundleRelease"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
       },
       "node": "20.19.4",
-      "cache": {
-        "disabled": false,
-        "clear": true,
-        "paths": []
-      },
       "env": {
         "EXPO_USE_FAST_RESOLVER": "1"
       }
