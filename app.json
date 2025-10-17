@@ -8,6 +8,9 @@
     "scheme": "frontend",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": false,
+    "extra": {
+      "EXPO_PUBLIC_BACKEND_URL": "https://ghostly-backend.onrender.com"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymouschat.app"
