@@ -8,9 +8,6 @@
     "scheme": "frontend",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "extra": {
-      "EXPO_PUBLIC_BACKEND_URL": "https://ghostly-backend.onrender.com"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymouschat.app"
@@ -55,6 +52,7 @@
       "typedRoutes": true
     },
     "extra": {
+      "EXPO_PUBLIC_BACKEND_URL": "https://ghostly-backend.onrender.com",
       "router": {},
       "eas": {
         "projectId": "6e80ae0f-5ce1-4d39-a2b2-5d81b4823dd0"
