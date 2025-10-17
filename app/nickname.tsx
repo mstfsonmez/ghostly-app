@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Pressable, KeyboardAvoidingView, Platform, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Pressable, KeyboardAvoidingView, Platform } from 'react-native';
 import { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -57,12 +57,8 @@ export default function NicknameScreen() {
     >
       <View style={styles.content}>
         <View style={styles.header}>
-          <Image 
-            source={require('../assets/images/ghost-icon.svg')} 
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Text style={styles.title}>Ghostly</Text>
+          <MaterialIcons name="forum" size={100} color="#1DA1F2" />
+          <Text style={styles.title}>ChatRoom</Text>
           <Text style={styles.subtitle}>Anonymous IRC-style Chat</Text>
         </View>
 
@@ -123,7 +119,6 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#000' },
   content: { flex: 1, justifyContent: 'center', padding: 24 },
   header: { alignItems: 'center', marginBottom: 60 },
-  logo: { width: 120, height: 120, marginBottom: 20 },
   title: { color: '#fff', fontSize: 40, fontWeight: 'bold', marginTop: 20 },
   subtitle: { color: '#666', fontSize: 16, marginTop: 8 },
   form: { marginBottom: 40 },
