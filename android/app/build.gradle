@@ -87,11 +87,6 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-
     namespace 'com.anonymouschat.app'
     defaultConfig {
         applicationId 'com.anonymouschat.app'
@@ -102,12 +97,9 @@ android {
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
         
-        missingDimensionStrategy 'react-native-camera', 'general'
-        missingDimensionStrategy 'react-native-webrtc', 'default'
-        
-        // Fix for native .so libraries not being packaged
+        // ABI Filters - SoLoader DSO yükleme hatası için gerekli
         ndk {
-            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+            abiFilters "armeabi-v7a", "arm64-v8a"
         }
     }
     signingConfigs {
@@ -136,10 +128,14 @@ android {
     }
     packagingOptions {
         jniLibs {
-            // Force legacy packaging to include native .so libraries
-            def enableLegacyPackaging = findProperty('expo.useLegacyPackaging') ?: 'true'
-            useLegacyPackaging enableLegacyPackaging.toBoolean()
+            // Legacy packaging - native .so kütüphaneleri için kritik
+            useLegacyPackaging true
         }
+        // Duplicate .so dosyaları için çözüm
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
     }
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
