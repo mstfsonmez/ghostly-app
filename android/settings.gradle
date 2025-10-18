@@ -24,12 +24,14 @@ plugins {
 
 rootProject.name = 'Ghostly'
 
+// Expo autolinking önce
+expoAutolinking.useExpoModules()
+
+// React Native autolinking - Expo'nun config komutunu kullan
 extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
-  ex.autolinkLibrariesFromCommand()
+  ex.autolinkLibrariesFromCommand(expoAutolinking.rnConfigCommand)
 }
 
-// Expo modüllerini kullan
-expoAutolinking.useExpoModules()
 expoAutolinking.useExpoVersionCatalog()
 
 include ':app'
